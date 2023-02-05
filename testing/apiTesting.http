@@ -1,0 +1,18 @@
+POST http://localhost:5000/v1/auth/login-user
+Content-Type: application/json
+
+{
+  "email": "vedavratpp@gmail.com",
+  "password": "vedavrat10",
+}
+
+
+###
+
+POST http://localhost:5000/v1/auth/login-user
+Content-Type: application/json
+
+{
+  "email": "vedavratpp@gmail.com",
+  "password": "vedavrat10"
+}

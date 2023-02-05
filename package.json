@@ -1,11 +1,12 @@
 {
-    "name": "sateeq",
+    "name": "alphabi-server",
     "version": "1.0.0",
-    "description": "backend for sateeq",
-    "main": "server.js",
+    "description": "server for alpha-bi",
+    "main": "app.js",
     "scripts": {
         "test": "echo \"Error: no test specified\" && exit 1",
-        "server": "nodemon src/server.ts"
+        "build": "tsc",
+        "start": "node ./dist/app.js"
     },
     "author": "",
     "license": "ISC",

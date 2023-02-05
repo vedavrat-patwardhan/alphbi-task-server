@@ -11,6 +11,10 @@ const config_1 = require("../config");
 const saltRounds = 10;
 const createUser = async (req, res, next) => {
     const { email, password } = req.body;
+    const user = await authModel_1.authModel.findOne({ email }).lean().exec();
+    if (user) {
+        throw next(new apiError_1.BadRequestError('This mailId is already registered'));
+    }
     bcrypt_1.default.hash(password, saltRounds, async (err, hash) => {
         if (err) {
             throw next(new apiError_1.InternalError((err === null || err === void 0 ? void 0 : err.message) || 'Error while hashing password'));

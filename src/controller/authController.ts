@@ -3,6 +3,7 @@ import bcrypt from 'bcrypt';
 import * as jwt from 'jsonwebtoken';
 import {
     AuthFailureError,
+    BadRequestError,
     InternalError,
     NotFoundError,
 } from '../utils/apiError';
@@ -15,6 +16,10 @@ const saltRounds = 10;
 
 export const createUser: catchAsync = async (req, res, next) => {
     const { email, password } = req.body;
+    const user = await authModel.findOne({ email }).lean().exec();
+    if (user) {
+        throw next(new BadRequestError('This mailId is already registered'));
+    }
     bcrypt.hash(password, saltRounds, async (err, hash) => {
         if (err) {
             throw next(

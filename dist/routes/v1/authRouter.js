@@ -1,0 +1,14 @@
+"use strict";
+Object.defineProperty(exports, "__esModule", { value: true });
+const tslib_1 = require("tslib");
+const express_1 = require("express");
+const authController_1 = require("../../controller/authController");
+const validate_1 = tslib_1.__importDefault(require("../../middleware/validate"));
+const catchAsync_1 = tslib_1.__importDefault(require("../../utils/catchAsync"));
+const validation_1 = require("../../validation");
+const isAuth_1 = tslib_1.__importDefault(require("../../middleware/isAuth"));
+const authRouter = (0, express_1.Router)();
+authRouter.post('/create-user', (0, validate_1.default)(validation_1.authValidation.auth), (0, catchAsync_1.default)(authController_1.createUser));
+authRouter.post('/login-user', (0, validate_1.default)(validation_1.authValidation.auth), (0, catchAsync_1.default)(authController_1.loginUser));
+authRouter.patch('/update-favorite', (0, validate_1.default)(validation_1.authValidation.favorite), isAuth_1.default, (0, catchAsync_1.default)(authController_1.updateUser));
+exports.default = authRouter;
